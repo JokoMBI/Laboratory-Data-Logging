@@ -1,7 +1,12 @@
 #include <Wire.h>
 #include <Adafruit_AM2315.h>
 
-/*************************************************** 
+/***************************************************
+ * Driver to read out the AM2315 using the Adafruit_AM2315 lib and
+ * send data to a RasPi via serial interface
+ * 
+ * Program bases on the example program "am2315test" (view text below)
+ * 
   This is an example for the AM2315 Humidity + Temp sensor
 
   Designed specifically to work with the Adafruit BMP085 Breakout 
@@ -42,6 +47,8 @@ void loop() {
     am2315.readTemperatureAndHumidity(t,h);
     Serial.println("Temp: "+String(t));
     Serial.println("Hum: "+String(h));
+
+    
 //    Serial.print("Temp: "); 
 //    Serial.println(am2315.readTemperature());
 //    delay(30);
