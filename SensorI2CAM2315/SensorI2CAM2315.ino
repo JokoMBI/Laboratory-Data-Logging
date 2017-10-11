@@ -34,11 +34,11 @@ Adafruit_AM2315 am2315;
 float t,  //temperature variable to send
       h;  //humidity variable to send
 
-int c;
+char c;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("new AM2315 module"); //new sensor module AM2315 connected
+  Serial.println("new AM2315 module"); //new sensor module AM2315 connected; 
 
   if (! am2315.begin()) {
      Serial.println("Sensor not found, check wiring!");
@@ -48,20 +48,21 @@ void setup() {
 
 void loop() {
 
-  if (Serial.available() > 0) {
-    // get incoming byte:
-    c = Serial.read();
-      
+  //wait for a serial msg
+  if (Serial.available() > 0) {    
+    
+    c = Serial.read(); //get incoming charakter
+      //check the charakter
       switch (c) {
-          case 't':
-            Serial.println(am2315.readTemperature());
+          case 't':                                     //in case of a 't'
+            Serial.println(am2315.readTemperature());   //send back the temperature
             break;
-          case 'h':
-            Serial.println(am2315.readHumidity());
+          case 'h':                                     //in case of a 'h'
+            Serial.println(am2315.readHumidity());      //send back the humidity
             break;
+            
           default:
-            // if nothing else matches, do the default
-            // default is optional
+
           break;
         }
   }
