@@ -4,6 +4,9 @@
 /***************************************************
  * Driver to read out the AM2315 using the Adafruit_AM2315 lib and
  * send data to a RasPi via serial interface
+ * the program is waiting for a character from the RasPi, 
+ * getting a 't' causes sending back the temperature in a String
+ * getting a 'h' causes sending back the humidity in a String
  * 
  * Program bases on the example program "am2315test" (view text below)
  * 
@@ -28,33 +31,39 @@
 // Connect YELLOW to i2c data - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 4
 
 Adafruit_AM2315 am2315;
-float t, h;
+float t,  //temperature variable to send
+      h;  //humidity variable to send
 
+int c;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("AM2315 Test!");
+  Serial.println("new AM2315 module"); //new sensor module AM2315 connected
 
   if (! am2315.begin()) {
-     Serial.println("Sensor not found, check wiring & pullups!");
+     Serial.println("Sensor not found, check wiring!");
      while (1);
   }
 }
 
 void loop() {
 
+  if (Serial.available() > 0) {
+    // get incoming byte:
+    c = Serial.read();
+      
+      switch (c) {
+          case 't':
+            Serial.println(am2315.readTemperature());
+            break;
+          case 'h':
+            Serial.println(am2315.readHumidity());
+            break;
+          default:
+            // if nothing else matches, do the default
+            // default is optional
+          break;
+        }
+  }
 
-    am2315.readTemperatureAndHumidity(t,h);
-    Serial.println("Temp: "+String(t));
-    Serial.println("Hum: "+String(h));
-
-    
-//    Serial.print("Temp: "); 
-//    Serial.println(am2315.readTemperature());
-//    delay(30);
-//    Serial.print("Hum: "); 
-//    Serial.println(am2315.readHumidity());
-
-
-  delay(1000);
 }
