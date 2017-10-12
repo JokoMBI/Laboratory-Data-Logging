@@ -1,12 +1,13 @@
-Serielles Protokoll Raspberry Pi <-> Arduino
+Serial commands Raspberry Pi <-> Arduino
 
 Pi -> Arduino
-'?t' - Anfrage aktueller Temperaturwert
-'?h' - Anfrage aktueller Feuchtigkeitswert
+
+'t' - request for actual temperature value
+'h' - request for actual humidity value
 ...
 
 
 
 
 Arduino ->Pi
-'t'+(
+'xx.x'+\r\n - value for requested parameter
