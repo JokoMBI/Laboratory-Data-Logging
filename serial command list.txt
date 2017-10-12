@@ -10,4 +10,4 @@ Pi -> Arduino
 
 
 Arduino ->Pi
-'xx.x'+\r\n - value for requested parameter
+'xx.xx' - value for requested parameter
