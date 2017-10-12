@@ -11,15 +11,13 @@ port =serial.Serial(
     stopbits=serial.STOPBITS_ONE,
     bytesize=serial.EIGHTBITS,
     writeTimeout = 0,
-    timeout = 10,
+    timeout = 2,
     rtscts=False,
     dsrdtr=False,
     xonxoff=False)
 
 c = ""      #Serial command variable
 msg = ""    #Serial incomming message
-value = ""  #numeric value (not really
-            #parsed until now, just the first 4 chars of the message)
 
 time.sleep(0.3) #waiting for initializing port and receiving a message containing
                 #information about the sensor
@@ -51,10 +49,13 @@ while True:
 
     time.sleep(0.05)            #buffering time
     
-    if port.inWaiting() > 0:
-        msg = port.readline()   #read incoming message
+    while port.inWaiting() > 0:
+        msg = msg + str(port.read())[2]   #read incoming message 1)
         
-        value = msg[0:4]        #take the first 4 chars
-        print(value)            #and print it
-        value = ""
-        msg= ""
+    print(msg)            #and print it
+    msg= ""
+
+
+
+"""1) After reading one serial byte the .read function unfortunatly puts "b'" in front of the byte
+and a ' at the end so I just took the second char of the string to put it to the message. """
