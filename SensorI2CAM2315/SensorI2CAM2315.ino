@@ -55,14 +55,14 @@ void loop() {
       //check the charakter
       switch (c) {
           case 't':                                     //in case of a 't'
-            Serial.println(am2315.readTemperature());   //send back the temperature
+            Serial.print(am2315.readTemperature());   //send back the temperature
             break;
           case 'h':                                     //in case of a 'h'
-            Serial.println(am2315.readHumidity());      //send back the humidity
+            Serial.print(am2315.readHumidity());      //send back the humidity
             break;
             
           default:
-
+          
           break;
         }
   }
