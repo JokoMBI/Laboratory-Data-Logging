@@ -31,8 +31,8 @@
 // Connect YELLOW to i2c data - on '168/'328 Arduino Uno/Duemilanove/etc thats Analog 4
 
 Adafruit_AM2315 am2315;
-float t,  //temperature variable to send
-      h;  //humidity variable to send
+//float t,  //temperature variable to send
+//      h;  //humidity variable to send
 
 char c;
 
@@ -55,10 +55,10 @@ void loop() {
       //check the charakter
       switch (c) {
           case 't':                                     //in case of a 't'
-            Serial.print(am2315.readTemperature());   //send back the temperature
+            Serial.println(am2315.readTemperature());   //send back the temperature
             break;
           case 'h':                                     //in case of a 'h'
-            Serial.print(am2315.readHumidity());      //send back the humidity
+            Serial.println(am2315.readHumidity());      //send back the humidity
             break;
             
           default:

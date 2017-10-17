@@ -10,4 +10,10 @@ Pi -> Arduino
 
 
 Arduino ->Pi
-'xx.xx' - value for requested parameter
+'xx.xx' - value for requested parameter in String
+
+
+
+
+Serial config:
+standard Arduino (baud: 9600; 8 data; no parity, 1 stop)
